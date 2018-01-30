@@ -1,0 +1,34 @@
+.b-login-form, .b-login-form-extended {
+ 	background: white;
+ 	border: solid 2px #dee2e5;
+ }
+ 
+ .login-form .submit-button
+ {
+    color: white !important;
+    background: #2a84b7 !important;
+    text-shadow: 0 0 0 #fff !important;
+    border: 1px solid #aaa !important;
+ }
+ 
+ .login-form .submit-button:hover
+ {
+    background: #4398d0 !important;
+ }
+ 
+ .login-form .submit-button:active
+ {
+    background: #0063b0 !important;
+ }
+ 
+ .login-form input
+ {
+    border: 2px solid #dee2e5 !important;
+    box-shadow: none !important;
+    webkit-box-shadow: none !important;    
+ }
+ 
+ .login-form input:focus
+ {
+    border: 2px solid #2a84b7 !important;  
+ }

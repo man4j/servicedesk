@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="ru-ru" xml:lang="ru-ru" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="HelpScripting.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <style></style>
+    </head>
+    <body>
+        <h1 data-mc-conditions="Default.HelpScripting">Скрипт шаблона отчета, печатной формы</h1>
+        <h3 data-mc-conditions="Default.HelpScripting"><a name="description"></a>Описание скрипта</h3>
+        <p>Скрипт шаблона отчета/печатной формы предназначен для:</p>
+        <ul>
+            <li value="1"> извлечения сложных данных, в частности, вычислимых атрибутов;</li>
+            <li value="2"> определения параметров отчета.</li>
+        </ul>
+        <p>Скрипт отчета можно условно разделить на два блока: определение параметров отчета и определение логики обработки сформированного запроса.</p>
+        <p class="Subtitle" data-mc-conditions="">Когда выполняется скрипт:</p>
+        <p>Скрипт выполняется в момент построения отчета.</p>
+        <p class="Subtitle" data-mc-conditions="">Результат выполнения скрипта:</p>
+        <p data-mc-conditions="">Скрипт возвращает объект table.</p>
+        <h3 data-mc-conditions="Default.HelpScripting"><a name="var"></a>Переменные контекста и их значения: </h3>
+        <ul>
+            <li value="1"><b>table</b> —  управляет таблицей отчета, table состоит из множества объектов row, представляющих строку таблицы.</li>
+        </ul>
+        <h3 data-mc-conditions="Default.HelpScripting"><a name="example"></a>Примеры скрипта</h3>
+        <ol>
+            <li value="1">
+                <p>Скрипт определяет параметры "Строка", "Целое число", "Дробное число", "Логический", "Справочник", "Объект":</p>
+                <p class="listing">api.parameters.getString("string1", "Строка", "строка по умолчанию"),</p>
+                <p class="listing">api.parameters.getInteger("integer1", "Целое число", 123),</p>
+                <p class="listing">api.parameters.getDouble("double1", "Дробное число", 123.45),</p>
+                <p class="listing">api.parameters.getBoolean("boolean1", "Логический", true),</p>
+                <p class="listing">api.parameters.getCatalogItem("catalogItem1", "Справочник", "currency", "currency\$1303"),</p>
+                <p class="listing">api.parameters.getObject("object1", "Сотрудник", "employee", "employee\$54801")</p>
+            </li>
+            <li value="2">
+                <p>Скрипт определяет параметры "Дата", "Дата/время":</p>
+                <p class="listing">api.parameters.getDate("date1", "Дата", new Date()),</p>
+                <p class="listing">api.parameters.getDateTime("dateTime1", "Дата-время", new Date()),</p>
+            </li>
+            <li value="3">
+                <p>Скрипт определяет параметр типа "Временной интервал" (Даты с - по) для построения отчета:</p>
+                <p class="listing">def getParameters()</p>
+                <p class="listing">{</p>
+                <p class="listing">//ПАРАМЕТРЫ--------------------------------</p>
+                <p class="listing">BEGIN_DATE = 'С' // Дата начала периода</p>
+                <p class="listing">END_DATE = 'По' // Дата конца периода</p>
+                <p class="listing">return</p>
+                <p class="listing">[ api.parameters.getDate("beginDate", BEGIN_DATE),</p>
+                <p class="listing">api.parameters.getDate("endDate", END_DATE) ] as List;</p>
+                <p class="listing">};</p>
+            </li>
+            <li value="4">
+                <p>Скрипт вычисляет общеео количество запросов и устанавливает в каждую строку процент от общего (в строке таблицы отчета выводится группа запросов, servicecalls — количество запросов в этой группе):</p>
+                <p class="listing">def all = table.rows.collect {row -&gt; row.servicecalls}.sum();</p>
+                <p class="listing">table.rows.each() { row -&gt;</p>
+                <p class="listing">row.percents = String.format("%.2f", row.servicecalls * 100.0 / all) + '%';</p>
+                <p class="listing">}</p>
+                <p class="listing">return table;</p>
+            </li>
+            <li value="5">
+                <p>Скрипт настройки новой функции.</p>
+                <ul>
+                    <li value="1">totalFunction — анализирует все строки отчета;</li>
+                    <li value="2">groupFunction — анализирует отдельно каждую группу.</li>
+                </ul>
+                <p class="listing">def getFunctions() {</p>
+                <p class="listing">return [ api.reports.totalFunction('function1', { rows -&gt;</p>
+                <p class="listing">return rows.size();</p>
+                <p class="listing">}),</p>
+                <p>&#160;</p>
+                <p class="listing">api.reports.groupFunction('function2', { rows -&gt;</p>
+                <p class="listing">return rows.size();</p>
+                <p class="listing">})</p>
+                <p class="listing">] as List;</p>
+                <p class="listing">}</p>
+            </li>
+            <li value="6">
+                <p>Скрипт получает текущее значение прямого счетчика в виде ЧЧ:ММ:</p>
+                <p class="listing">def currentDate = new Date();</p>
+                <p class="listing">table.rows.each() { row -&gt;</p>
+                <p class="listing">if(row.timerS.equals("a"))</p>
+                <p class="listing">{</p>
+                <p class="listing">row.timerElapsed = utils.formatters.formatLongToTime(row.timerL.longValue() + api.timing.serviceTime(row.serviceTime, row.timeZone, new Date(row.timerB.longValue()), currentDate),false).asString();</p>
+                <p class="listing">}</p>
+                <p class="listing">else</p>
+                <p class="listing">{</p>
+                <p class="listing">row.timerElapsed = utils.formatters.formatLongToTime(row.timerL.longValue(), false).asString();</p>
+                <p class="listing">}</p>
+                <p class="listing">}</p>
+                <p class="listing">return table;</p>
+            </li>
+        </ol>
+    </body>
+</html>

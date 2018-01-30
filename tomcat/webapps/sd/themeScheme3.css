@@ -1,0 +1,16 @@
+.b-login-form,
+.b-login-form-extended {
+	background: #e6e6f2;
+	background: -ms-linear-gradient(top, #e6e6f2, #79368a);
+	background: linear-gradient(top, #e6e6f2, #79368a);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#e6e6f2', endColorStr='#79368a',GradientType=0);
+}
+.b-login-form .b-login-form__footer-text {
+	color: #fbfcec;
+}
+.b-login-form .login-form input {
+	border: #f0f0f0;
+}
+.b-login-form .login-form .submit-button {
+	border: #d89bff;
+}

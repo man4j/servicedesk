@@ -1,0 +1,4 @@
+# Module admin
+# RPC service class, partial path of RPC policy file
+com.google.gwt.logging.shared.RemoteLoggingService, CA7964E5A65E9BAD226F2C030A9C56E2.gwt.rpc
+net.customware.gwt.dispatch.client.standard.StandardDispatchService, 0FE7E817037C77CA0AE7B0ACBFC5AFDC.gwt.rpc

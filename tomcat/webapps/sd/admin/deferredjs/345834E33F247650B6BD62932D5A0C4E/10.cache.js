@@ -1,0 +1,5 @@
+if (typeof $wnd == 'undefined' || typeof $wnd.admin == 'undefined' || typeof $wnd.admin.runAsyncCallback10 == 'undefined') {
+    delete __gwtModuleFunction['runAsyncCallback10'];
+} else {
+    $wnd.admin.runAsyncCallback10("function $pg(a,b){a.a=b}\nfunction cqg(a,b){a.c=b}\nfunction obu(a,b){YWf.call(this,a,b)}\nfunction Mku(a,b,c){a.k=w3j(b,a.Q.a,(p_g(),n_g),D3j(c,a.Q))}\nfunction Heu(a){var b;b=new obu(Liu(ikg(a.a)),FX(gfg(a.a)));$pg((pfg(a.a),b),Hiu(ikg(a.a)));pfg(a.a);Rpg(pfg(a.a));cqg((pfg(a.a),b),$ug(Lfg(a.a)));Mku((ikg(a.a),b),l2j(jgg(a.a)),j2j(jgg(a.a)));return b}\nTAe(7910,hmy,ygy,obu);_.xy=function pbu(){return Vug(this.c)};_.yy=function qbu(){return '\\u041D\\u0430\\u0441\\u0442\\u0440\\u043E\\u0439\\u043A\\u0430 \\u043F\\u043E\\u0447\\u0442\\u044B'};var MTd=BEf(nly,'MailPresenter',7910);TAe(3214,1,U1x);_.hq=function xhu(){this.b.dq(Heu(this.a.a))};tUx(cJ)(10);\n//# sourceURL=admin-10.js\n")
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="ru-ru" xml:lang="ru-ru" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="HelpScripting.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <style></style>
+    </head>
+    <body>
+        <h1 data-mc-conditions="Default.HelpScripting">Скрипт для определения списка пользователей, обладающих ролью</h1>
+        <h3 data-mc-conditions="Default.HelpScripting"><a name="description"></a>Описание скрипта</h3>
+        <p class="one1">Скрипт определяет список пользователей, обладающих указанной ролью. </p>
+        <p class="Subtitle">Когда выполняется скрипт:</p>
+        <ul>
+            <li value="1">При отправке оповещения, если в качестве получателей оповещения выбрана скриптовая роль.</li>
+        </ul>
+        <p class="Subtitle">Результат выполнения скрипта:</p>
+        <p>		Скрипт возвращает список сотрудников, обладающих указанной ролью.</p>
+        <h3 data-mc-conditions="Default.HelpScripting"><a name="var"></a>Переменные контекста и их значения</h3>
+        <p>Глобальные переменные контекста:</p>
+        <ul>
+            <li value="1">
+                <p><b>user</b> — пользователь, инициализировавший событие. Является объектом класса <span class="BaseСотрудник">(Undefined variable: Base.Сотрудник)</span>). </p>
+                <p>Если событие инициализировал суперпользователь, 
+					то user=null. </p>
+                <p>Если событие инициализировано скриптом (скриптовое действие по событию, скрипт на вход в статус), то переменная user берется из контекста инициировавшего его скрипта. </p>
+                <p>Пример: пользователь выполнил изменение атрибута --&gt; произошло изменение статуса объекта (действие по событию) --&gt; произошло изменение ответственного (действие на вход в статус) --&gt; произошло оповещение (действие по событию) .Во всех скриптах этой цепочки переменная user должна содержать сторудника, выполнившего первоначальное изменение атрибута.                        </p>
+            </li>
+            <li value="2"><b>ip</b> — ip пользователя user.</li>
+            <li value="3"><b>api</b> — содержит доступные вспомогательные методы. Например api.utils, api.ldap, api.timing,....</li>
+            <li value="4"><b>modules</b> — содержит доступные модули, загруженные в интерфейсе технолога (набор библиотек написанных на groovy).</li>
+            <li value="5"><b>appVersion</b> — версия приложения.</li>
+            <li value="6"><b>logger</b> — объект консоли (для логирования), используется только при выполнении скриптов через консоль.</li>
+            <li value="7"><b>utils</b> — Синоним api.utils.</li>
+        </ul>
+        <p>&#160;</p>
+        <ul>
+            <li value="1">
+                <p><b>subject</b> — объект, относительно которого проверяются права.
+Используется при создании относительной пользовательской роли. Наличие данной роли у пользователя вычисляется относительно отдельного объекта указанного класса.
+</p>
+                <p>Значение subject может быть "null", если  проверяются права на добавление объекта.</p>
+            </li>
+            <li value="2">
+                <p><b>initialValues</b> — значение атрибута на форме добавления объекта.</p>
+                <p>Используется при проверке прав на добавление объекта. Позволяет выполнять проверку прав в момент открытия формы добавления и в момент сохранения объекта, учитывая заполнение значений атрибутов на форме добавления:</p>
+                <ul style="list-style-type: circle;">
+                    <li value="1">при открытии формы добавления объекта содержит значения атрибутов, переданные на форму добавления;</li>
+                    <li value="2">при сохранении формы добавления объекта также содержит значения атрибутов, введенные на форме добавления;</li>
+                    <li value="3">в других случаях значение переменной не&#160;определено (null)</li>
+                </ul>
+            </li>
+            <li value="3" data-mc-conditions="Default.443"><b>oldSubject</b> — объект до выполнения редактирования, для которого проверяется право. Во всех случаях, кроме непосредственно редактирования, данная переменная равна null. Данная переменная может быть использована только для пользовательских атрибутов. </li>
+            <li value="4">
+                <p><b>sourceObject</b> — объект, относительно которого проверяется право (запрос, соглашение, сотрудник, отдел, команда и т.д).</p>
+                <p>При редактировании объекта: sourceObject = null. При проверке прав комментариев и файлов: sourceObject = null (этом случае объект, к которому добавляется комментарий или файл, находится в subject).</p>
+                <p>Примеры: При проверке права добавления объекта определенного типа в карточке компании: sourceObject — объект "компания" (root$101). При проверке права добавления объекта определенного типа в карточке объекта: sourceObject — объект, в карточке которого проверялась возможность добавления объектов. </p>
+            </li>
+            <li value="5"><b>user</b> — текущий сотрудник, пользователь. </li>
+        </ul>
+        <h3 data-mc-conditions="Default.HelpScripting"><a name="example"></a>Примеры скрипта</h3>
+        <ol>
+            <li value="1">
+                <p>Скрипт формирует роль "Роль:Сотрудники команд, участвующих в голосовании". Все сотрудники команд, указанных в атрибуте из параметра, войдут в список пользователей обладающих ролью, т.е. получат оповещение.</p>
+                <p class="listing">def ATTR = 'teamAttrCode' //код атрибута типа "Ссылка на бизнес-объект"/"Набор ссылок на БО"/"Обратная ссылка" на класс <span class="BaseКоманда">(Undefined variable: Base.Команда)</span></p>
+                <p class="listing">def collection = [] as Set;</p>
+                <p class="listing">def voters = ([] + subject[ATTR]).findAll{it.removed == false};</p>
+                <p class="listing">if(voters != null &amp;&amp; !voters.isEmpty())</p>
+                <p class="listing">{</p>
+                <p class="listing">voters.each()</p>
+                <p class="listing">{</p>
+                <p class="listing">collection += it.members.findAll{it.removed == false};</p>
+                <p class="listing">}</p>
+                <p class="listing">}</p>
+                <p class="listing">return collection</p>
+            </li>
+            <li value="2">
+                <p>Скрипт возвращает сотрудников (в виде списка), который храниться в определенном атрибуте.</p>
+                <p class="listing">def ATTR = 'attrCode'; //Атрибут типа "Ссылка на бизнес-объект класса <span class="BaseСотрудник">(Undefined variable: Base.Сотрудник)</span> <![CDATA[
+]]></p>
+                <p class="listing">def root = utils.get('root', [:]);  //Получаем компанию
+</p>
+                <p class="listing">def dev_head = root[ATTR];
+</p>
+                <p class="listing">def objs = [];
+</p>
+                <p class="listing">objs.add(dev_head);
+</p>
+                <p class="listing">return objs;</p>
+            </li>
+        </ol>
+    </body>
+</html>

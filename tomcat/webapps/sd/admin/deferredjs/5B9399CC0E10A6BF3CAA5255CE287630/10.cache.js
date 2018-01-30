@@ -1,0 +1,5 @@
+if (typeof $wnd == 'undefined' || typeof $wnd.admin == 'undefined' || typeof $wnd.admin.runAsyncCallback10 == 'undefined') {
+    delete __gwtModuleFunction['runAsyncCallback10'];
+} else {
+    $wnd.admin.runAsyncCallback10("function Xog(a,b){a.a=b}\nfunction _og(a,b){a.c=b}\nfunction O9t(a,b){VVf.call(this,a,b)}\nfunction kju(a,b,c){a.k=p2j(b,a.Q.a,(m$g(),k$g),w2j(c,a.Q))}\nfunction fdu(a){var b;b=new O9t(jhu(fjg(a.a)),MX(deg(a.a)));Xog((meg(a.a),b),fhu(fjg(a.a)));meg(a.a);Oog(meg(a.a));_og((meg(a.a),b),Xtg(Ieg(a.a)));kju((fjg(a.a),b),e1j(gfg(a.a)),c1j(gfg(a.a)));return b}\nhAe(7902,fly,xfy,O9t);_.gy=function P9t(){return Stg(this.c)};_.hy=function Q9t(){return 'Mail settings'};var aTd=yDf(nky,'MailPresenter',7902);hAe(3207,1,R0x);_.hq=function Xfu(){this.b.dq(fdu(this.a.a))};TSx(gJ)(10);\n//# sourceURL=admin-10.js\n")
+}

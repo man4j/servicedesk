@@ -1,0 +1,239 @@
+@CHARSET "UTF-8";
+
+.action{
+	cursor: pointer; 
+}
+
+.actionColumn-classes{
+	border: 1;
+	background: transparent;
+	cursor: pointer; 
+}
+
+.attributeGroup .attributeGroup-attributes {
+	border: 1px solid #729fcf !important;
+	border-collapse: collapse;
+	margin: 3px auto 3px auto;
+	width: 99% !important;
+}
+
+.attributeGroup .attributeGroup-attributes td {
+	border: 1px solid #729fcf;
+	padding: 2px !important;
+}
+
+.attributeGroup .attributeGroup-actionColumn {
+	width: 20px;
+}
+
+.attributeTbl-hidden-edit>tbody>tr>td:FIRST-CHILD img {
+	display: none;
+}
+
+.l_table {
+	margin-bottom: 19px;
+}
+
+.l_table .buttonsMarginRight {
+	margin-right: 11px !important;
+}
+
+.accessMatrix {
+	background-color: #f7ffff;
+	border-collapse: collapse;
+	border-right: 2px solid #b8c9d0 !important;
+	border-bottom: 2px solid #b8c9d0 !important;
+}
+
+.accessMatrix tr {
+	border-top: #b8c9d0 solid 1px;
+}
+
+.accessMatrix td {
+	border-left: #b8c9d0 solid 1px;
+	padding: 2px !important;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.accessMatrix .rowHeader {
+	text-align: left;
+	font-weight: bold;
+}
+
+.accessMatrix .columnHeader {
+	font-weight: bold;
+}
+
+.valueMapTable {
+	background-color: #f7ffff;
+	border-collapse: collapse;
+	border-right: 2px solid #b8c9d0 !important;
+	border-bottom: 2px solid #b8c9d0 !important;
+}
+
+.valueMapTable tr {
+	border-top: #b8c9d0 solid 1px;
+}
+
+.valueMapTable td {
+	border-left: #b8c9d0 solid 1px;
+	border-right: #b8c9d0 solid 1px;
+	padding: 2px !important;
+	vertical-align: middle;
+}
+
+.valueMapTable_header {
+	font-weight: bold;
+	text-align: center;
+}
+
+.valueMapTable .source {
+	background-color: #ddd;
+}
+
+.valueMapTable .target {
+	background-color: #def;
+}
+
+.valueMapTable td.command {
+	width: 32px;
+	text-align: center;
+}
+
+.valueMapTable td.command img {
+	cursor: pointer;
+}
+
+.l_table_b {
+	background-color: #f7ffff;
+	border-collapse: collapse;
+	padding-left: 0px !important;
+	border-right: 2px solid #b8c9d0 !important;
+	border-left: 1px solid #b8c9d0 !important;
+	border-bottom: 2px solid #b8c9d0 !important;
+}
+
+.l_table_b tr {
+	border-right: #b8c9d0 solid 1px;
+	border-bottom: #b8c9d0 solid 1px;
+	border-top: #b8c9d0 solid 1px;
+	text-align: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	vertical-align: bottom;
+}
+
+.l_table_b tr td .gwt-HTML {
+	width:26px;
+}
+
+.l_table_b .first:hover, .l_table_b .second:hover{
+	background-color: #C4E0EC;
+	cursor: default;
+}
+
+.l_table_b td {
+	border-right: #b8c9d0 solid 1px;
+	border-bottom: #b8c9d0 solid 1px;
+	padding: 5px 5px !important;
+	width:50%;
+}
+
+.l_table_b td.actionColumn {
+	border-left: 0 !important;
+	border-right: 0 !important;
+	width: 20px !important;
+	padding: 0 0 !important;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.l_table_b td.actionColumn button, .actionColumn-classes button{
+	background: transparent;
+	border: 0;
+	cursor:pointer;
+	padding:0;
+}
+
+.l_table_b .head {
+	font-weight: bold;
+	background-color: transparent;
+	padding-left: 73px;
+}
+
+.l_table_b .first {
+	background-color: #eef5f8;
+}
+
+.l_table_b .second {
+	background-color: transparent;
+}
+
+.l_table_b_hidden button {
+	display: none;
+}
+
+.content {
+	overflow-x: hidden;
+	overflow-y: hidden;
+	margin-left: 33px;
+	margin-right: 33px;
+}
+
+.content .verticalPanel {
+	border: 0;
+}
+
+.designButton {
+	border: 0;
+	background: transparent;
+	float: right;
+	color: transparent !important;
+}
+
+.classcaseinfo>tbody>tr>td {
+	padding-left: 5px;
+	padding-right: 5px;
+	
+	width: 50%;
+}
+
+.classcaseinfo>tbody>tr>td:FIRST-CHILD {
+	padding-left: 0;
+}
+.classcaseinfo>tbody>tr>td:LAST-CHILD {
+	padding-right: 0;
+}
+
+.designButton:HOVER {
+	border: 0;
+}
+
+.designButton:ACTIVE {
+	border: 0;
+}
+
+.designButton[disabled] {
+	border: 0;
+}
+
+.designButton[disabled]:hover {
+	border: 0;
+}
+
+.tableCaption {
+	background-image: url(imgs/back_table.gif) !important;
+	background-position: bottom !important;
+	background-repeat: repeat-x !important;
+	border: #71c1e2 solid 1px;
+	padding-top: 20px;
+	padding-left: 20px !important;
+	color: #327a98;
+	font-size: 18px;
+	min-height: 32px;
+	vertical-align: middle;
+	overflow: auto;
+	word-wrap: break-word;
+	cursor: default !important;
+}

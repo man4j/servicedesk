@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="ru-ru" xml:lang="ru-ru" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="HelpScripting.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <style></style>
+    </head>
+    <body>
+        <h1 data-mc-conditions="Default.HelpScripting">Скрипт обработки  входящей почты</h1>
+        <h2 data-mc-conditions="Default.H2">Скрипт обработки  входящей почты</h2>
+        <h3 data-mc-conditions="Default.HelpScripting"><a name="description"></a>Описание скрипта</h3>
+        <p data-mc-conditions="">Скрипт задает правило обработки входящей почты и условия его выполнения.</p>
+        <p class="Subtitle">Когда выполняется скрипт:</p>
+        <p>Скрипт  выполняется планово, по расписанию задачи планировщика "Обработка входящей почты". </p>
+        <p class="Subtitle">Результат выполнения скрипта:</p>
+        <p>Возвращаемого значения нет. </p>
+        <h3 data-mc-conditions="Default.HelpScripting"><a name="var"></a>Переменные контекста и их значения: </h3>
+        <ul>
+            <li value="1"><b>message</b> — содержит обрабатываемое почтовое сообщение.</li>
+            <li value="2"><b>result</b> — позволяет получить или назначить результат обработки входящего сообщения. Получение результата может быть полезно, например если письмо было отклонено еще до запуска скрипта. </li>
+        </ul>
+        <h3 data-mc-conditions="Default.HelpScripting"><a name="features"></a>Особенности скрипта</h3>
+        <ul>
+            <li value="1">Существует две реализации на основе модуля и без использования модуля.</li>
+        </ul>
+        <h3 data-mc-conditions="Default.HelpScripting"><a name="example"></a>Примеры скрипта</h3>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">* Категория: Стандартный скрипт обработки почты для SD4.4.</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">* Логика работы:</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">* - проверки перед обработкой письма: отсутствие темы, отсутствие письменного содержания и было ли письмо отклонено</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">*  - поиск существующего запроса по номеру в теме письма</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">*  - добавление комментария к найденному запросу с содержимым письма (обычный текст, не&#160;rtf)</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">*  - прикрепление письма и вложенных в него файлов без учета вложенных в текст письма изображений</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">*  - создание запроса указанного типа, при отсутствии найденного, с привязкой к указанному соглашению и сотруднику</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">*  найденному по адресу отправителю или заданному по умолчанию</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">*  - смена статуса, ответственного, заполнение дополнительных атрибутов (для найденного и/или,</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">*    в зависимости от параметров, созданного запроса)</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">*  - отправка оповещений с результатом обработки письма: обработки найденного запроса, создания нового,</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">*    заполнения дополнительных свойств)</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">*</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">* Результат работы скрипта должен устанавливаться в переменной окружения result.</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">* Доступны следующие коды завершения скрипта:</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">*- ERROR ошибка обработки</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">*- NEW_BO зарегистрирован запрос</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">*- ATTACH письмо прикреплено к существующему запросу</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">*- REJECT письмо отклонено</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">*- OUTGOING другое (в настоящее время не используется)</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">*</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">* Версия: 4.4</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">*</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">* В контексте скрипта доступны следующие объекты:</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">* &lt;ul&gt;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">* &lt;li&gt;&lt;b&gt;message&lt;/b&gt; — разобранное почтовое сообщение &lt;/li&gt;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">* &lt;li&gt;&lt;b&gt;result&lt;/b&gt; - объект результатов обработки сообщения, может содержать результаты других обработчиков&lt;/li&gt;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">* &lt;li&gt;&lt;b&gt;api&lt;/b&gt; - API со вспомогательными методами, полезными при обработке почтовых сообщений&lt;/li&gt;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">* &lt;li&gt;&lt;b&gt;utils&lt;/b&gt; - утилитарные методы общего назначения - ru.naumen.core.server.script.spi.ScriptUtils&lt;/li&gt;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">* &lt;li&gt;&lt;b&gt;logger&lt;/b&gt; - логгер скрипта&lt;/li&gt;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">* &lt;/ul&gt;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">*/</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">//ПАРАМЕТРЫ---------------------------------------------------------------------------------------------------</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// объявления переменной параметров (не удалять), нужна для передачи перечисленных ниже свойств</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">def m = modules.mail.init(binding);</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Префикс номера для поиска запроса в теме письма. Может быть пустым.</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.SEARCH_PREFIX = "";</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Параметры: уровень влияния, срочность, типы запроса, указанные ниже, должны быть настроены в системе!</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Код элемента справочника 'Уровни влияния'</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.IMPACT_CODE = "out";</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Код уровня срочности</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.URGENCY_CODE = "U1";</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Соответствие e-mail адресов отправителей кодам типов запросов ([&lt;адресс отправителя&gt; : &lt;fqn типа запроса&gt;])</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// ['user@company.com' : 'classCode$typeCode']</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.SENDER_2_TYPE_CODE = ['' : '', '' : ''];</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// fqn дефолтного типа запроса</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.DEFAULT_SC_FQN = 'serviceCall$call';</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Уникальный номер соглашения по умолчанию</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.AGREEMENT_INVENTORY_NUMBER = "33";</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// и/или идентификатор соглашения</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.AGREEMENT_UUID = 'agreement$2001';</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Уникальный номер услуги по умолчанию</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.SERVICE_INVENTORY_NUMBER = "33";</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// и/или идентификатор услуги</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.SERVICE_UUID = 'slmService$1902';</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Идентификаторы типов сотрудников, на которых можно регистрировать запрос. Если пусто, то на любых.</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">def employeeTypes = []; //типы записываются в кавычках через запятую.</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Код атрибута типа RichText, значение которого заполняется HTML содержимым письма при регистрации, если указан</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">def richDescrAttrCode = null;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Фамилия служебного сотрудника, используется если не был найден клиент по адресу отправителя</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.DEFAULT_EMPLOYEE_NAME = "qq";</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Код целевого состояния, в которое будет переведён запрос</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.NEW_STATE = "resolved";</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Ответственный за запрос(сотрудник) (уникальный идентификатор сотрудника в виде 'employee$12345')</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.RESPONSIBLE_EMPLOYEE_UUID = '';</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Ответственный за запрос(команда) (уникальный идентификатор команды в виде 'team$10000')</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.RESPONSIBLE_TEAM_UUID = '';</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Дополнительные свойства запроса(записывать в виде 'attr1' : 'value1', 'attr2' : 'value', ...) будут устанавливаться для найденного</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// или созданного запроса (в зависимости от значения def addProps) в конце выполнения скрипта</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">def additionalProperties = [:];</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Дополнительные свойства запроса(записывать в виде 'attr1' : 'value1', 'attr2' : 'value', ...) будут устанавливаться при создании запроса</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">def additionalCreateProperties = [:];</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">&#160;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Логические переменные:</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.SEARCH_SC = true; // указывает, требуется ли искать запрос по данным из письма</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.CREATE_SC = true; // указывает, требуется ли регистрировать новый запрос (если запрос не найден или искать не требуется)</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.ADD_COMMENT = true; // указывает, требуется ли добавить комментарий с текстом письма к найденному запросу</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.ADD_ORIGINAL_MAIL = true; // указывает, требуется ли прикреплять к запросу само письмо как файл</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.ADD_ATTACHMENTS_FILES = true; //указывает, требуется ли прикреплять к запросу вложенные в письмо файлы</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.NOTIFY_AFTER_PROCESS = true; //указывает, требуется ли оповещать отправителя о результате обработки письма</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Статусы запроса в скрипте (их исправлять не надо!).</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">SEARCHED = 'scIsSearched'; // Найден</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">CREATED = 'scIsCreated'; // Создан</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// В зависимости от статуса запроса в скрипте (Найден или Создан) можно раздельно указать дополнительные действия с запросом.</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Для этого в квадратные скобки нужно вставить соответствующее значение статуса (SEARCHED или CREATED)</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">def chngState = [CREATED]; // перевод запроса в новый статус. Если опция требуется в любом случае, то [SEARCHED,CREATED];</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">def setResp = [CREATED]; // установка ответственного</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">def addProps = [SEARCHED]; // дополнительные действия</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">&#160;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Параметры для заполнения атрибута "Способ обращения"</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.FILL_REQUEST_WAY = false;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.REQUEST_WAY_ATTR = "wayAddressing"; // Код атрибута "Способ обращения" типа "Элемент справочника"</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.REQUEST_WAY_CATALOG_CODE = "wayAddressing"; // Код справочника, в котором хранятся коды обращения</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.REQUEST_WAY_ELEMENT_CODE = "sd"; // Код элемента "По почте"</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">&#160;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Разделитель между новым текстом сообщения и цитатой предыдущей переписки</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.COMMENT_DELIMITER = '---↑ При ответе добавьте комментарий выше этой строки ↑---';</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">&#160;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">//Параметр def logLevel отвечает за логирование:</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">//возможные значения: </p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">//debug - уровень логирования DEBUG, </p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">//info - уровень логирования INFO, </p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">//любое другое значение - без логирования.</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.LOG_LEVEL = 'debug';</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">&#160;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">//ОСНОВНОЙ БЛОК--------------------------------------------------------</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Для упрощенной проверки состояния запроса (создан или найден) на основе колекции содержащей методоы (создан и/или найден)</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">def condition = { collection -&gt;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">for (element in collection) if (m."$element"()) return true;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">}</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Реализация условия смены состояния в зависимости от того создан запрос или найден</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.changeStateCondition = { sc -&gt; return condition(chngState) }</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Аналогично для методов установки ответственного</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.setResponsibleCondition = { sc -&gt; return condition(setResp) }</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// и заполнения дополнительных свойств</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.additionalActionsCondition = { sc -&gt; return condition(addProps) }</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.additionalActions = { sc -&gt; utils.edit(sc, additionalProperties) }</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">&#160;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// если соглашений у сотрудника ровно одно, то берем единственное соглашение (игнорируя старую проверку)</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">def oldApplicableAgreement = m.getApplicableAgreement;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.getApplicableAgreement = { employee -&gt;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">def agreements = employee.recipientAgreements;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">if (agreements?.size() == 1) return agreements.first();</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">else return oldApplicableAgreement(employee);</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">};</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">&#160;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Заполнение описания в зависимости от значения richDescrAttrCode</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">if (richDescrAttrCode)</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">{</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">def oldScDescription = m.scDescription;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.scDescription = {</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">api.mail.helper.replaceReferencesToAttachments(message);</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">def result = oldScDescription();</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">result.putAll([(richDescrAttrCode) : message.htmlBody]);</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">return result;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">}</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">}</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">&#160;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// реализация метода заполнения дополнительных свойств при создании запроса</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.additionalCreateProperties = { return additionalCreateProperties }</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// подходящий клиент</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.applicableEmployee = { employee -&gt;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">return employeeTypes.isEmpty() || employeeTypes.contains(employee.getMetainfo().getCase())</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">};</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">&#160;</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">// Вызов основного метода модуля обработки почты</p>
+        <p class="listing" data-mc-conditions="Default.HelpScripting">m.process();</p>
+    </body>
+</html>

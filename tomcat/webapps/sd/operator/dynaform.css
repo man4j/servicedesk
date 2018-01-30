@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+body {
+	height: 100%;
+	width: 100%;
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	color: #000000;
+	font-size: 12px;
+	background-color: #FFFFFF;
+	line-height: 20px;
+}
+
+.cellTree{
+	max-height: 500px;
+	overflow: auto;
+}
+
+.tabCnt {
+	height: 100%;
+	overflow: auto;
+}
+
+.PropertyList{
+    width: 100%;	
+}
+
+.noHand td{
+	cursor: default;
+}

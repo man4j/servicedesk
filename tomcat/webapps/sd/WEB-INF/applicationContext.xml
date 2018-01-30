@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--$Id$ -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:sws="http://www.springframework.org/schema/web-services"
+    xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+	 	http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services-2.0.xsd">
+
+    <import resource="classpath:/ru/naumen/core/spring-beans.xml" />
+
+    <bean class="ru.naumen.core.server.SpringPropertyPlaceholderConfigurer" name="propertyConfigurer">
+        <property name="ignoreResourceNotFound" value="true" />
+        <property name="locations">
+            <list>
+                <value>classpath:/dbaccess-default.properties</value>
+                <value>file:///${user.home}/.naumen/sd/conf/dbaccess.properties</value>
+                <value>file:///${ext.prop.dir}/dbaccess.properties</value>
+                <value>classpath:/features-default.properties</value>
+                <value>file:///${ext.prop.dir}/features.properties</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <sws:annotation-driven />
+
+    <sws:dynamic-wsdl id="soapService" portTypeName="Service" locationUri="/soap/"
+        targetNamespace="http://naumen.ru/soap/server">
+        <sws:xsd location="/WEB-INF/commonSoapService.xsd" />
+    </sws:dynamic-wsdl>
+    <sws:static-wsdl location="/soap/smevSoapService.wsdl"></sws:static-wsdl>
+
+    <sws:interceptors>
+        <bean class="ru.naumen.soap.server.EndpointInterceptor">
+
+        </bean>
+    </sws:interceptors>
+
+    <bean id="wsdlDefinitionHandlerAdapter" class="ru.naumen.soap.server.ConfigurableWsdlDefinitionHandlerAdapter">
+        <property name="baseUrl" value="${baseurl}" />
+    </bean>
+<!-- Эти HandlerAdapter добавлены, так как иначе после org.springframework.web.servlet.DispatcherServlet.initHandlerMappings(ApplicationContext) 
+будет присутствовать только wsdlDefinitionHandlerAdapter, а это приведет к ошибке при использовании rest-сервисов -->
+    <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter">
+    </bean>
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter">
+    </bean>
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+    </bean>
+
+</beans>

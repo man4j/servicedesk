@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:smp="http://naumen.ru/soap/server"
+    targetNamespace="http://naumen.ru/soap/server" xmlns:tns="http://naumen.ru/soap/server" elementFormDefault="qualified">
+
+    <xs:element name="AddFileRequest" type="tns:addFileRequest" />
+
+    <xs:element name="CreateRequest" type="tns:createRequest" />
+
+    <xs:element name="DeleteRequest" type="tns:deleteRequest" />
+
+    <xs:element name="EditRequest" type="tns:editRequest" />
+
+    <xs:element name="FindRequest" type="tns:findRequest" />
+
+    <xs:element name="GetFileRequest" type="tns:getFileRequest" />
+
+    <xs:element name="GetRequest" type="tns:getRequest" />
+
+    <xs:complexType name="deleteRequest">
+        <xs:sequence>
+            <xs:element name="accessKey" type="xs:string" form="qualified" />
+            <xs:element name="uuid" type="xs:string" form="qualified" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="getRequest">
+        <xs:sequence>
+            <xs:element name="accessKey" type="xs:string" form="qualified" />
+            <xs:element name="uuid" type="xs:string" form="qualified" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="addFileRequest">
+        <xs:sequence>
+            <xs:element name="accessKey" type="xs:string" form="qualified" />
+            <xs:element name="content" type="xs:string" form="qualified" />
+            <xs:element name="mimeType" type="xs:string" form="qualified" />
+            <xs:element name="sourceUUID" type="xs:string" form="qualified" />
+            <xs:element name="title" type="xs:string" form="qualified" />
+            <xs:element name="attrCode" type="xs:string" form="qualified" minOccurs="0"  maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="editRequest">
+        <xs:complexContent>
+            <xs:extension base="tns:hasAttributesRequest">
+                <xs:sequence>
+                    <xs:element name="uuid" type="xs:string" form="qualified" minOccurs="0" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="hasAttributesRequest" abstract="true">
+        <xs:sequence>
+            <xs:element name="accessKey" type="xs:string" form="qualified" />
+            <xs:element name="attributes" form="qualified" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="entry" type="tns:entry" form="qualified" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="entry">
+        <xs:sequence>
+            <xs:element name="key" type="xs:string" form="qualified" />
+            <xs:element name="value" type="tns:anyType" form="qualified" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="anyType">
+        <xs:sequence>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="string" type="xs:string" form="qualified" />
+                <xs:element name="aggregate" type="tns:aggregateValue" form="qualified" />
+                <xs:element name="dateTimeInterval" type="tns:dateTimeInterval" form="qualified" />
+                <xs:element name="hyperlink" type="tns:hyperlink" form="qualified" />
+                <xs:element name="objects" type="tns:objectsStr" form="qualified" />
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="aggregateValue">
+        <xs:sequence>
+            <xs:element name="ou" type="xs:string" minOccurs="0" />
+            <xs:element name="team" type="xs:string" minOccurs="0" />
+            <xs:element name="employee" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="dateTimeInterval">
+        <xs:sequence />
+        <xs:attribute name="length" type="xs:long" />
+        <xs:attribute name="interval" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="hyperlink">
+        <xs:sequence />
+        <xs:attribute name="text" type="xs:string" />
+        <xs:attribute name="url" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="objectsStr">
+        <xs:sequence>
+            <xs:element name="objectsStr" type="xs:string" form="qualified" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="createRequest">
+        <xs:complexContent>
+            <xs:extension base="tns:hasAttributesRequest">
+                <xs:sequence>
+                    <xs:element name="fqn" type="xs:string" form="qualified" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="findRequest">
+        <xs:complexContent>
+            <xs:extension base="tns:hasAttributesRequest">
+                <xs:sequence>
+                    <xs:element name="fqn" type="xs:string" form="qualified" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="getFileRequest">
+        <xs:sequence>
+            <xs:element name="accessKey" type="xs:string" form="qualified" />
+            <xs:element name="uuid" type="xs:string" form="qualified" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+

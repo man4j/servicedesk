@@ -1,0 +1,171 @@
+body
+{
+	color: #404040;
+	font-family: Arial;
+	font-size: 0.7em;
+	line-height: 1.7em;
+	margin-bottom: 17px;
+	margin-left: 17px;
+	max-width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+h1
+{
+	font-weight: normal;
+        line-height: 26px;
+	width: 100%;
+	color: #191970;
+}
+
+h2
+{
+	font-size: 1.2em;
+	margin-bottom: 4px;
+	margin-top: 20px;
+	color: #483d8b;
+}
+
+ul
+{
+	padding-left: 20px;
+}
+
+li
+{
+	margin-bottom: 6px;
+	margin-top: 6px;
+	orphans: 2;
+	widows: 2;
+}
+
+p
+{
+	margin-bottom: 8px;
+	margin-top: 8px;
+}
+
+li > p
+{
+    font-weight: bold;
+    color: cadetblue;
+}
+
+table
+{
+	width: 100% !important;
+}
+
+td
+{
+	color: #999;
+	vertical-align: top;
+	text-align: left;
+	text-indent: 0;
+	padding-top: 0em;
+	border-bottom: 1px solid #ddd;
+        vertical-align: middle;
+        word-break: break-word;
+}
+
+td + td
+{
+	color: #444;
+}
+
+thead
+{
+	font-size: 11pt;
+	font-family: Arial;
+	color: #a9a9a9;
+}
+
+th
+{
+	background-color: #f5f5f5;
+	border-bottom: 2px solid #c0c0c0;
+	text-align: left;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 10pt;
+	vertical-align: top;
+}
+
+td.Metod_attr
+{
+        color: brown;
+	text-align: left;
+	text-indent: 0;
+	padding-left: 2em;
+	padding-top: 0em;
+}
+
+p.listing
+{
+	font-family: 'Courier New';
+	color: #191970;
+	background-color: #f0fff0;
+	font-weight: initial;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	padding-left: 8px;
+	line-height: 14px;
+        word-break: break-word;
+	
+}
+
+p.listing_cur
+{
+	font-family: 'Courier New';
+	color: #191970;
+	background-color: #f0fff0;
+	font-size: 10pt;
+	margin-bottom: 0;
+	margin-top: 0;
+	font-weight: normal;
+	font-style: italic;
+}
+
+p.comment
+{
+	background-repeat: no-repeat;
+	border-radius: 6px;
+	padding: 10px 10px 10px 40px;
+	color: lightskyblue;
+	border: solid 1px lightskyblue;
+	font-style: italic;
+}
+
+.xref
+{
+	color: #2D8DCC;
+	font-weight: bold;
+	mc-format: '{para}';
+	text-decoration: underline;
+}
+
+.xref:hover
+{
+	color: #708090;
+}
+
+p.Subtitle
+{
+	margin-bottom: 0pt;
+	text-align: left;
+	font-weight: bold;
+	font-style: normal;
+	page-break-after: avoid;
+	margin-top: 6px;
+	font-size: 1, 10em;
+	font-family: ;
+	color: #483d8b;
+}
+
+.one1
+{
+}
+

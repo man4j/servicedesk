@@ -1,0 +1,3 @@
+moduleName=ScriptDtObject-module
+moduleVersion=1.0
+extensionClasses=ru.naumen.core.server.script.spi.ScriptDtObjectExtension

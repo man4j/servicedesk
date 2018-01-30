@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: jenkins
+Build-Jdk: 1.7.0_72
+Specification-Title: sdng-war [war module base configuration]
+Specification-Version: 4.5.0.12
+Specification-Vendor: Naumen
+Implementation-Title: sdng-war [war module base configuration]
+Implementation-Version: 4.5.0.12
+Implementation-Vendor-Id: ru.naumen
+Implementation-Vendor: Naumen
+buildId: 678
+buildNumber: 6400
+fullVersion: 4.5.0.12.6400.678.0
+jobName: 4.0-R-Deploy
+revision: 0
+

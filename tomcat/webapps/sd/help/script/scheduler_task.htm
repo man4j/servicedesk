@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="ru-ru" xml:lang="ru-ru" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="HelpScripting.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <style></style>
+    </head>
+    <body>
+        <h1 data-mc-conditions="Default.HelpScripting">Скрипт задачи планировщика</h1>
+        <h2 data-mc-conditions="Default.HelpScripting"><a name="description"></a>Описание скрипта</h2>
+        <p>Скрипт задачи планировщика определяет произвольное действие, выполняемое в системе автоматически по заданному расписанию. </p>
+        <p class="Subtitle">Когда выполняется скрипт:</p>
+        <ul>
+            <li value="1">каждый раз при наступлении времени запуска задачи планировщика.</li>
+        </ul>
+        <p class="Subtitle">Результат выполнения скрипта:</p>
+        <p>Возвращаемого значения нет.</p>
+        <h3 data-mc-conditions="Default.HelpScripting"><a name="var"></a>Переменные контекста и их значения </h3>
+        <p>Глобальные переменные контекста:</p>
+        <ul>
+            <li value="1"><b>user</b> — пользователь, инициализировавший событие. Является объектом класса <span class="BaseСотрудник">"Сотрудник"&#160;(employee)</span>). Если событие инициализировал суперпользователь, 
+					то user=null. </li>
+            <li value="2"><b>ip</b> — ip пользователя user.</li>
+            <li value="3"><b>api</b> — содержит доступные вспомогательные методы. Например api.utils, api.ldap, api.timing,....</li>
+            <li value="4"><b>modules</b> — содержит доступные модули, загруженные в интерфейсе технолога (набор библиотек написанных на groovy).</li>
+            <li value="5"><b>appVersion</b> — версия приложения.</li>
+            <li value="6"><b>logger</b> — объект консоли (для логирования), используется только при выполнении скриптов через консоль.</li>
+            <li value="7"><b>utils</b> — Синоним api.utils.</li>
+        </ul>
+        <p>&#160;</p>
+        <ul>
+            <li value="1"><b>currentTaskInfo</b> —  информация о текущей задаче планировщика.</li>
+        </ul>
+        <p>Используя переменную currentTaskInfo можно получить следующие парамеры задачи планировщика:</p>
+        <table style="width: 90%;margin-left: 0;margin-right: auto;caption-side: top;mc-caption-repeat: true;mc-caption-continuation: '(продолжение)';">
+            <col style="width: 326px;" />
+            <col style="width: 70%;" />
+            <thead>
+                <tr>
+                    <th>Название параметра</th>
+                    <th>Получение</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>UUID задачи планировщика</td>
+                    <td>
+                                currentTaskInfo.getCode()                         </td>
+                </tr>
+                <tr>
+                    <td>Название задачи планировщика</td>
+                    <td>
+                                currentTaskInfo.getTitle()                            </td>
+                </tr>
+                <tr>
+                    <td>Описание задачи планировщика</td>
+                    <td>currentTaskInfo.getDescription()                             </td>
+                </tr>
+                <tr>
+                    <td>Дата последнего выполнения задачи планировщика</td>
+                    <td>currentTaskInfo.getLastExecutionDate()                            </td>
+                </tr>
+                <tr>
+                    <td>Дата следующего запуска задачи планировщика</td>
+                    <td>
+                                currentTaskInfo.getPlanDate()                           </td>
+                </tr>
+                <tr>
+                    <td>Правила выполнения задачи планировщика</td>
+                    <td>currentTaskInfo.getTrigger()                             </td>
+                </tr>
+                <tr>
+                    <td>Правила выполнения задачи планировщика по коду правила:</td>
+                    <td>currentTaskInfo.getTrigger(triggerCode)                            </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 data-mc-conditions="Default.HelpScripting"><a name="features"></a>Особенности скрипта</h3>
+        <p>В задачах планировщика обычно выполняются долгие, "тяжелые" скрипты. Рекомендуется планировать выполние таких скриптов на  ночное время или на выходные. </p>
+        <h3 data-mc-conditions="Default.HelpScripting"><a name="example"></a>Примеры скрипта</h3>
+        <ol>
+            <li value="1">Ежедневная отправка отчетов по почте:</li>
+            <li value="2">
+                <p>Автоматическая перепривязка запросов к определенным бизнес-объектам.</p>
+            </li>
+        </ol>
+    </body>
+</html>

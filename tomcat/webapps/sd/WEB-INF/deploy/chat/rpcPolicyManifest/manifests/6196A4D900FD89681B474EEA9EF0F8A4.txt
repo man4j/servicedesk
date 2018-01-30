@@ -1,0 +1,2 @@
+serviceClass: ru.naumen.core.client.comet.CometServlet
+path: 2D56329B469D6DFFE82FB370FA72A5ED.gwt.rpc

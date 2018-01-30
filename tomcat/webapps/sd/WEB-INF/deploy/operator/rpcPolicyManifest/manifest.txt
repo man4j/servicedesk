@@ -1,0 +1,5 @@
+# Module operator
+# RPC service class, partial path of RPC policy file
+net.customware.gwt.dispatch.client.standard.StandardDispatchService, EC6964DA2E5BD5688B2584EE71D2D06C.gwt.rpc
+com.google.gwt.logging.shared.RemoteLoggingService, 5CC104F85399C503447C827F18826E85.gwt.rpc
+ru.naumen.core.client.comet.CometServlet, EDA389751BF31C60391A12D20A08FDF0.gwt.rpc

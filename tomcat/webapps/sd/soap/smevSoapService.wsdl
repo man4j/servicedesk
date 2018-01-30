@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:ns2="http://naumen.ru/soap/server" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.springframework.org/schema/beans"
+    xmlns:smev="http://smev.gosuslugi.ru/rev120315" targetNamespace="http://naumen.ru/soap/server">
+
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://smev.gosuslugi.ru/rev120315"
+            xmlns:ns2="http://naumen.ru/soap/server" xmlns:ns1="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+            attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://smev.gosuslugi.ru/rev120315">
+            <xs:import namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" />
+            <xs:import namespace="http://naumen.ru/soap/server" />
+            <xs:element name="AppDocument" nillable="true" type="tns:AppDocumentType" />
+            <xs:element name="BinaryData" nillable="true" type="xs:base64Binary" />
+            <xs:element name="CaseNumber" nillable="true" type="xs:string" />
+            <xs:element name="Date" nillable="true" type="xs:anyType" />
+            <xs:element name="DigestValue" nillable="true" type="xs:base64Binary" />
+            <xs:element name="ExchangeType" nillable="true" type="xs:string" />
+            <xs:element name="Header" nillable="true" type="tns:HeaderType" />
+            <xs:element name="Message" nillable="true" type="tns:MessageType" />
+            <xs:element name="MessageClass" nillable="true" type="tns:MessageClassType" />
+            <xs:element name="MessageId" nillable="true" type="xs:string" />
+            <xs:element name="NodeId" nillable="true" type="xs:string" />
+            <xs:element name="OriginRequestIdRef" nillable="true" type="xs:string" />
+            <xs:element name="Originator" nillable="true" type="tns:orgExternalType" />
+            <xs:element name="Recipient" nillable="true" type="tns:orgExternalType" />
+            <xs:element name="Reference" nillable="true" type="tns:ReferenceType" />
+            <xs:element name="RequestCode" nillable="true" type="xs:string" />
+            <xs:element name="RequestIdRef" nillable="true" type="xs:string" />
+            <xs:element name="Sender" nillable="true" type="tns:orgExternalType" />
+            <xs:element name="ServiceCode" nillable="true" type="xs:string" />
+            <xs:element name="Status" nillable="true" type="tns:StatusType" />
+            <xs:element name="TestMsg" nillable="true" type="xs:string" />
+            <xs:element name="TimeStamp" nillable="true" type="xs:anyType" />
+            <xs:element name="TypeCode" nillable="true" type="tns:TypeCodeType" />
+            <xs:complexType name="HeaderType">
+                <xs:sequence>
+                    <xs:element name="NodeId" type="xs:string" />
+                    <xs:element name="MessageId" type="xs:string" />
+                    <xs:element name="TimeStamp" type="xs:dateTime" />
+                    <xs:element name="MessageClass" type="tns:MessageClassType" />
+                </xs:sequence>
+                <xs:attribute ref="ns1:Id" />
+                <xs:attribute name="actor" type="xs:string" />
+            </xs:complexType>
+            <xs:complexType name="AddFileBaseMessageType">
+                <xs:sequence>
+                    <xs:element name="Message" type="tns:MessageType" />
+                    <xs:element name="MessageData" type="tns:AddFileMessageDataType" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CreateBaseMessageType">
+                <xs:sequence>
+                    <xs:element name="Message" type="tns:MessageType" />
+                    <xs:element name="MessageData" type="tns:CreateMessageDataType" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="DeleteBaseMessageType">
+                <xs:sequence>
+                    <xs:element name="Message" type="tns:MessageType" />
+                    <xs:element name="MessageData" type="tns:DeleteMessageDataType" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EditBaseMessageType">
+                <xs:sequence>
+                    <xs:element name="Message" type="tns:MessageType" />
+                    <xs:element name="MessageData" type="tns:EditMessageDataType" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="FindBaseMessageType">
+                <xs:sequence>
+                    <xs:element name="Message" type="tns:MessageType" />
+                    <xs:element name="MessageData" type="tns:FindMessageDataType" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="GetBaseMessageType">
+                <xs:sequence>
+                    <xs:element name="Message" type="tns:MessageType" />
+                    <xs:element name="MessageData" type="tns:GetMessageDataType" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="GetFileBaseMessageType">
+                <xs:sequence>
+                    <xs:element name="Message" type="tns:MessageType" />
+                    <xs:element name="MessageData" type="tns:GetFileMessageDataType" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="MessageType">
+                <xs:sequence>
+                    <xs:element name="Sender" type="tns:orgExternalType" />
+                    <xs:element name="Recipient" type="tns:orgExternalType" />
+                    <xs:element minOccurs="0" name="Originator" type="tns:orgExternalType" />
+                    <xs:element name="TypeCode" type="tns:TypeCodeType" />
+                    <xs:element name="Status" type="tns:StatusType" />
+                    <xs:element name="Date" type="xs:dateTime" />
+                    <xs:element name="ExchangeType" type="xs:string" />
+                    <xs:element minOccurs="0" name="RequestIdRef" type="xs:string" />
+                    <xs:element minOccurs="0" name="OriginRequestIdRef" type="xs:string" />
+                    <xs:element minOccurs="0" name="ServiceCode" type="xs:string" />
+                    <xs:element minOccurs="0" name="CaseNumber" type="xs:string" />
+                    <xs:element minOccurs="0" name="TestMsg" type="xs:string" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="orgExternalType">
+                <xs:sequence>
+                    <xs:element name="Code" type="xs:string" />
+                    <xs:element name="Name" type="xs:string" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AddFileMessageDataType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="AppData" type="tns:AddFileAppDataType" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CreateMessageDataType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="AppData" type="tns:CreateAppDataType" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="DeleteMessageDataType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="AppData" type="tns:DeleteAppDataType" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EditMessageDataType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="AppData" type="tns:EditAppDataType" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="FindMessageDataType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="AppData" type="tns:FindAppDataType" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="GetFileMessageDataType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="AppData" type="tns:GetFileAppDataType" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="GetMessageDataType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="AppData" type="tns:GetAppDataType" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AddFileAppDataType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ns2:addFileRequest" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="DeleteAppDataType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ns2:deleteRequest" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EditAppDataType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ns2:editRequest" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="FindAppDataType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ns2:findRequest" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="GetFileAppDataType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ns2:getFileRequest" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="GetAppDataType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ns2:getRequest" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CreateAppDataType">
+                <xs:sequence>
+                    <xs:element minOccurs="1" maxOccurs="1" ref="ns2:createRequest" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AppDocumentType">
+                <xs:sequence>
+                    <xs:element name="RequestCode" type="xs:string" />
+                    <xs:element minOccurs="0" name="BinaryData" type="xs:base64Binary" />
+                    <xs:element minOccurs="0" name="Reference" type="tns:ReferenceType" />
+                    <xs:element minOccurs="0" name="DigestValue" type="xs:base64Binary" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ReferenceType">
+                <xs:all />
+            </xs:complexType>
+            <xs:simpleType name="MessageClassType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="REQUEST" />
+                    <xs:enumeration value="RESPONSE" />
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="TypeCodeType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="GSRV" />
+                    <xs:enumeration value="GFNC" />
+                    <xs:enumeration value="OTHR" />
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="StatusType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="REQUEST" />
+                    <xs:enumeration value="RESULT" />
+                    <xs:enumeration value="REJECT" />
+                    <xs:enumeration value="INVALID" />
+                    <xs:enumeration value="ACCEPT" />
+                    <xs:enumeration value="PING" />
+                    <xs:enumeration value="PROCESS" />
+                    <xs:enumeration value="NOTIFY" />
+                    <xs:enumeration value="FAILURE" />
+                    <xs:enumeration value="CANCEL" />
+                    <xs:enumeration value="STATE" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:schema>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://naumen.ru/soap/server"
+            xmlns:smev="http://smev.gosuslugi.ru/rev120315" elementFormDefault="qualified" targetNamespace="http://naumen.ru/soap/server"
+            version="1.0">
+
+            <xs:import namespace="http://smev.gosuslugi.ru/rev120315" />
+
+            <xs:element name="AddFileRequest" nillable="true" type="smev:AddFileBaseMessageType" />
+            <xs:element name="CreateRequest" nillable="true" type="smev:CreateBaseMessageType" />
+            <xs:element name="DeleteRequest" nillable="true" type="smev:DeleteBaseMessageType" />
+            <xs:element name="EditRequest" nillable="true" type="smev:EditBaseMessageType" />
+            <xs:element name="FindRequest" nillable="true" type="smev:FindBaseMessageType" />
+            <xs:element name="GetFileRequest" nillable="true" type="smev:GetFileBaseMessageType" />
+            <xs:element name="GetRequest" nillable="true" type="smev:GetBaseMessageType" />
+        </xs:schema>
+
+
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://naumen.ru/soap/server"
+            elementFormDefault="qualified" targetNamespace="http://naumen.ru/soap/server" version="1.0">
+
+            <xs:element name="addFileRequest" type="tns:AddFileRequest" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+            <xs:element name="createRequest" type="tns:CreateRequest" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+            <xs:element name="deleteRequest" type="tns:DeleteRequest" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+            <xs:element name="editRequest" type="tns:EditRequest" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+            <xs:element name="findRequest" type="tns:FindRequest" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+            <xs:element name="getFileRequest" type="tns:GetFileRequest" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+            <xs:element name="getRequest" type="tns:GetRequest" />
+
+            <xs:complexType name="GetFileRequest" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                <xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                    <xs:element xmlns:xs="http://www.w3.org/2001/XMLSchema" form="qualified" name="accessKey"
+                        type="xs:string" />
+                    <xs:element form="qualified" name="uuid" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="DeleteRequest" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                <xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                    <xs:element xmlns:xs="http://www.w3.org/2001/XMLSchema" form="qualified" name="accessKey"
+                        type="xs:string" />
+                    <xs:element form="qualified" name="uuid" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CreateRequest" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                <xs:complexContent xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                    <xs:extension base="tns:hasAttributesRequest" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                        <xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                            <xs:element form="qualified" name="fqn" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="hasAttributesRequest" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                <xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                    <xs:element xmlns:xs="http://www.w3.org/2001/XMLSchema" form="qualified" name="accessKey"
+                        type="xs:string" />
+                    <xs:element form="qualified" minOccurs="0" name="attributes" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                        <xs:complexType xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                            <xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                                <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="entry"
+                                    type="tns:entry" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="entry" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                <xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                    <xs:element form="qualified" name="key" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+                    <xs:element form="qualified" minOccurs="0" name="value" type="tns:anyType"
+                        xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="anyType">
+                <xs:sequence>
+                    <xs:choice minOccurs="0" maxOccurs="unbounded">
+                        <xs:element name="string" type="xs:string" form="qualified" />
+                        <xs:element name="aggregate" type="tns:aggregateValue" form="qualified" />
+                        <xs:element name="dateTimeInterval" type="tns:dateTimeInterval" form="qualified" />
+                        <xs:element name="hyperlink" type="tns:hyperlink" form="qualified" />
+                        <xs:element name="objects" type="tns:objectsStr" form="qualified" />
+                    </xs:choice>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="aggregateValue">
+                <xs:sequence>
+                    <xs:element name="ou" type="xs:string" minOccurs="0" />
+                    <xs:element name="team" type="xs:string" minOccurs="0" />
+                    <xs:element name="employee" type="xs:string" minOccurs="0" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="dateTimeInterval">
+                <xs:sequence />
+                <xs:attribute name="length" type="xs:long" />
+                <xs:attribute name="interval" type="xs:string" />
+            </xs:complexType>
+
+            <xs:complexType name="hyperlink">
+                <xs:sequence />
+                <xs:attribute name="text" type="xs:string" />
+                <xs:attribute name="url" type="xs:string" />
+            </xs:complexType>
+
+            <xs:complexType name="objectsStr">
+                <xs:sequence>
+                    <xs:element name="objectsStr" type="xs:string" form="qualified" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="EditRequest" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                <xs:complexContent xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                    <xs:extension base="tns:hasAttributesRequest" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                        <xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                            <xs:element form="qualified" minOccurs="0" name="uuid" type="xs:string"
+                                xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="FindRequest" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                <xs:complexContent xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                    <xs:extension base="tns:hasAttributesRequest" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                        <xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                            <xs:element form="qualified" name="fqn" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="GetRequest" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                <xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                    <xs:element xmlns:xs="http://www.w3.org/2001/XMLSchema" form="qualified" name="accessKey"
+                        type="xs:string" />
+                    <xs:element form="qualified" name="uuid" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AddFileRequest" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                <xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                    <xs:element xmlns:xs="http://www.w3.org/2001/XMLSchema" form="qualified" name="accessKey"
+                        type="xs:string" />
+                    <xs:element form="qualified" name="content" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+                    <xs:element name="mimeType" type="xs:string" form="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+                    <xs:element form="qualified" name="sourceUUID" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+                    <xs:element form="qualified" name="title" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+                    <xs:element form="qualified" maxOccurs="1" minOccurs="0" name="attrCode" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema"  />
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+            version="1.0">
+            <xs:attribute name="Id" type="xs:string" />
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="create">
+        <wsdl:part element="smev:Header" name="Header">
+        </wsdl:part>
+        <wsdl:part element="ns2:CreateRequest" name="CreateRequest">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="addFile">
+        <wsdl:part element="smev:Header" name="Header">
+        </wsdl:part>
+        <wsdl:part element="ns2:AddFileRequest" name="AddFileRequest">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="get">
+        <wsdl:part element="smev:Header" name="Header">
+        </wsdl:part>
+        <wsdl:part element="ns2:GetRequest" name="GetRequest">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="edit">
+        <wsdl:part element="smev:Header" name="Header">
+        </wsdl:part>
+        <wsdl:part element="ns2:EditRequest" name="EditRequest">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="delete">
+        <wsdl:part element="smev:Header" name="Header">
+        </wsdl:part>
+        <wsdl:part element="ns2:DeleteRequest" name="DeleteRequest">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getFile">
+        <wsdl:part element="smev:Header" name="Header">
+        </wsdl:part>
+        <wsdl:part element="ns2:GetFileRequest" name="GetFileRequest">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="find">
+        <wsdl:part element="smev:Header" name="Header">
+        </wsdl:part>
+        <wsdl:part element="ns2:FindRequest" name="FindRequest">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="Service">
+        <wsdl:operation name="create">
+            <wsdl:input message="ns2:create" name="create">
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="addFile">
+            <wsdl:input message="ns2:addFile" name="addFile">
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="get">
+            <wsdl:input message="ns2:get" name="get">
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="edit">
+            <wsdl:input message="ns2:edit" name="edit">
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="delete">
+            <wsdl:input message="ns2:delete" name="delete">
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="getFile">
+            <wsdl:input message="ns2:getFile" name="getFile">
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="find">
+            <wsdl:input message="ns2:find" name="find">
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ServiceSoap11" type="ns2:Service">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+        <wsdl:operation name="create">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input name="create">
+                <soap:header message="ns2:create" part="Header" use="literal">
+                </soap:header>
+                <soap:body parts="CreateRequest" use="literal" />
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="addFile">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input name="addFile">
+                <soap:header message="ns2:addFile" part="Header" use="literal">
+                </soap:header>
+                <soap:body parts="AddFileRequest" use="literal" />
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="get">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input name="get">
+                <soap:header message="ns2:get" part="Header" use="literal">
+                </soap:header>
+                <soap:body parts="GetRequest" use="literal" />
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="edit">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input name="edit">
+                <soap:header message="ns2:edit" part="Header" use="literal">
+                </soap:header>
+                <soap:body parts="EditRequest" use="literal" />
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="delete">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input name="delete">
+                <soap:header message="ns2:delete" part="Header" use="literal">
+                </soap:header>
+                <soap:body parts="DeleteRequest" use="literal" />
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="getFile">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input name="getFile">
+                <soap:header message="ns2:getFile" part="Header" use="literal">
+                </soap:header>
+                <soap:body parts="GetFileRequest" use="literal" />
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="find">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input name="find">
+                <soap:header message="ns2:find" part="Header" use="literal">
+                </soap:header>
+                <soap:body parts="FindRequest" use="literal" />
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ServiceService">
+        <wsdl:port binding="ns2:ServiceSoap11" name="ServiceSoap11">
+            <soap:address location="http://localhost:8888/sd/soap/" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

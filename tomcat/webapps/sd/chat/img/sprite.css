@@ -1,0 +1,20 @@
+.cross {
+  background: url(sprite.png) 0px -21px / 19px 20px no-repeat;
+  display: inline-block;
+  width: 19px;
+  height: 19px;
+}
+
+.cross-active {
+  background: url(sprite.png) 0px 0px / 19px 20px no-repeat;
+  display: inline-block;
+  width: 19px;
+  height: 19px;
+}
+
+.cross-hover {
+  background: url(sprite.png) -21px 0px / 19px 20px no-repeat;
+  display: inline-block;
+  width: 19px;
+  height: 19px;
+}

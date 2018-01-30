@@ -1,0 +1,5 @@
+# Module chat
+# RPC service class, partial path of RPC policy file
+com.google.gwt.logging.shared.RemoteLoggingService, 1DC8DD6500680CCC0FB48D72850E375B.gwt.rpc
+ru.naumen.core.client.comet.CometServlet, 2D56329B469D6DFFE82FB370FA72A5ED.gwt.rpc
+net.customware.gwt.dispatch.client.standard.StandardDispatchService, AF701B961C0DD784663DD2058A3C831E.gwt.rpc

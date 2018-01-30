@@ -1,0 +1,7 @@
+.b-login-form,
+.b-login-form-extended {
+	background: #1754a7;
+	background: -ms-linear-gradient(top, #1754a7, #275eac);
+	background: linear-gradient(top, #1754a7, #275eac);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#1754a7', endColorStr='#275eac',GradientType=0);
+}
